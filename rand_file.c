@@ -34,7 +34,8 @@ int main() {
   int i;
   int numbytes;
   int fd;
-  
+  int read_array[10];
+
   printf("Generating Random Numbers:\n");
   for (i = 0; i < 10; i++) {
     rand_array[i] = rand_int();
@@ -42,8 +43,9 @@ int main() {
   }
   printf("\n");
   
+
   printf("Writing Numbers to File...\n");
-  fd = open("out.txt", O_CREAT|O_WRONLY|O_APPEND, 0644);
+  fd = open("out", O_CREAT|O_WRONLY|O_APPEND, 0644);
   if (fd < 0) print_error();
 
   for (i = 0; i < 10; i++) {
@@ -55,10 +57,18 @@ int main() {
 
   
   printf("Reading numbers from file...\n");
-  fd = open("out.txt", O_RDONLY);
+  fd = open("out", O_RDONLY);
   if (fd < 0) print_error();
+  printf("\n");
 
-  // TODO: fill this in
+  printf("Verification that written values were the same\n");
+  
+  for (i = 0; i < 10; i++) {
+    numbytes = read(fd, &read_array[i], 4);
+    if (numbytes < 0) print_error();   
+
+    printf("\trandom %d: %u\n", i, read_array[i]);
+  }
   
   close(fd);
   

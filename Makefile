@@ -8,4 +8,4 @@ run: rand_file
 
 clean: 
 	-rm *~
-	-rm out.txt
+	-rm out
