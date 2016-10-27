@@ -6,6 +6,5 @@ rand_file: rand_file.c
 run: rand_file
 	./rand_file
 
-clean: 
+clean:
 	-rm *~
-	-rm out
